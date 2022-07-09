@@ -12,6 +12,7 @@ const EventoCheckbox: React.FC<{ evento: IEvento }> = ({ evento  }) => {
 
     atualizarEvento(eventoAlterado);
 
+
   }
   
   const estilos = [
