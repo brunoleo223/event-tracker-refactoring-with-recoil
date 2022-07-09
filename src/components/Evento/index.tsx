@@ -1,19 +1,12 @@
 import React from 'react';
-import { useSetRecoilState } from 'recoil';
+import useDelEvento from '../../hooks/useDelEvento';
 import { IEvento } from '../../interfaces/IEvento'
-import { listaDeEventosState } from '../../state/atom';
 import style from './Evento.module.scss';
 import EventoCheckbox from './EventoCheckbox';
 
 const Evento: React.FC<{ evento: IEvento }> = ({ evento }) => {
   
-  const setListaDeEventos = useSetRecoilState<IEvento[]>(listaDeEventosState)
-
-  const excluirEvento = () => {
-    setListaDeEventos(listaAntiga => {
-      return listaAntiga.filter(e => e.id !== evento.id)
-    })
-  }
+  const del = useDelEvento();
 
   const estilos = [
     style.Evento
@@ -29,7 +22,7 @@ const Evento: React.FC<{ evento: IEvento }> = ({ evento }) => {
     <div className="cards-info">
       <h3 className={style.descricao}>{evento.descricao} - {evento.inicio.toLocaleDateString()}</h3>
     </div>
-    <i className="far fa-times-circle fa-2x" onClick={excluirEvento}></i>
+    <i className="far fa-times-circle fa-2x" onClick={() => del(evento)}></i>
   </div>)
 }
 
